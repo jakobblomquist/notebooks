@@ -1569,7 +1569,13 @@ text-align: inherit;
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Propagation-of-Error-Estimates-Using-Python">Propagation of Error Estimates Using Python<a class="anchor-link" href="#Propagation-of-Error-Estimates-Using-Python">&#182;</a></h1>
 </div>
-</section>
+<div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>By Jakob Blomquist</p>
+<p>Malmo University, 2016</p>
+</div>
+    </div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1578,9 +1584,40 @@ text-align: inherit;
 <div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this python notebook we will go through the formulae for computing error propagation, that is, the total error of some computed property that depends on two or more variables, that each have their own (known) error. The assumptions made here are: 1. The variables are independant. 2. The errors are random.</p>
+<p>In this python notebook we will go through the formulae for computing error propagation, that is, the total error of some computed property that depends on two or more variables, that each have their own (known) error. The assumptions made here are:</p>
+<ol style="list-style-type: decimal">
+<li>The variables are independant.</li>
+<li>The errors are random.</li>
+</ol>
 <p>That is, we don't consider systematic errors here.</p>
 <p>We will go through some elementary theory needed for this topic, but we will NOT cover all the basic material related to the theory of random errors or normal distribution. We will use this Notebook to show some ways of how to use python, and its mathematical and plotting libraries numpy and matplotlib, to perform calculations, generate some figures, and test our theoretical formulae.</p>
+</div>
+    </div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="IPython-Notebook">IPython Notebook<a class="anchor-link" href="#IPython-Notebook">&#182;</a></h3>
+</div>
+<div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will use <a href="http://ipython.readthedocs.io/en/stable/overview.html">IPython</a> (short for interactive Python) which is a front end program to code in python and automatically execute the code while you type it. All code snippets in this document assume that you are also running an iPython session.</p>
+<p>There are several places off and online to learn to code in Python and we will not go through that here. Instead you will learn by doing the excercises in here and at other places.</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>IPython <a href="https://ipython.org/ipython-doc/3/notebook/notebook.html">Notebook</a> is a nice feature that allows one to type and run code as well as document it. There are several possibilities to share and/or convert the notebook to other formats such as html, pdf, or slides. This document is an example of a Notebook.</p>
+<p>To start a notebook session simply type in your terminal:</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<pre><code>ipython notebook</code></pre>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This will fire up your web browser and you will see a list of any notebooks that you have stored in the folder that you resided in while running the previous command.</p>
+<p>If you don't have one then either load one from some other folder or start a new one.</p>
 </div>
     </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1589,7 +1626,7 @@ text-align: inherit;
 <div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to be able to use numpy and matplotlib interactively we begin by calling both libraries once and for all by loading the pylab environment <em>pylab inline</em></p>
+<p>In order to be able to use numpy and matplotlib interactively we begin by calling both libraries, once and for all, by loading the pylab environment <em>pylab inline</em></p>
 </div>
     </div><div class="fragment">
     
@@ -1660,12 +1697,10 @@ Populating the interactive namespace from numpy and matplotlib
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The standard deviation is a constant property of the specific measurement and the conditions pertaining to said measurement, and is independent of how many times we perform it. It's a measure of the expected spread (or error) of the measurements away from the true value in such a way that about 68 % of the population would reside within <span class="math">\(\mu \pm \sigma.\)</span></p>
 </div>
-    </div><div class="fragment">
-    
+    </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If we were to plot the function above, and shade the area going between <span class="math">\(\mu -\sigma\)</span> to <span class="math">\(\mu +\sigma\)</span>, it would look something like this:</p>
-</div>
-    </div></section><section>
+</div></section><section>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
@@ -1966,32 +2001,28 @@ QmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As can be seen above, we don't need to call numpy or matplotlib anymore as we have already loaded the pylab environment in the beginning.</p>
 <p>Read the code again and try to understand what each part do.</p>
-</div></section>
-    </section><section>
-    <section>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Observe that the red curve above is a representation of the measurement method and the present conditions which all together gives the standard deviation of the population. Anything else than an infinite amount of measurements will only generate an approximation to the polulation <span class="math">\(\mu\)</span> and <span class="math">\(\sigma\)</span>.</p>
 <p>We have already seen the formula for the sample mean, <span class="math">\(\overline{x}\)</span>, and similarily, an estimate of <span class="math">\(\sigma\)</span> can be computed from the <em>n</em> measurements by:</p>
 </div><div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[s = \sqrt{\sum_i{(x_i - \overline{x})^2}/(n-1)}\]</span></p>
+<p><span class="math">\(s = \sqrt{\sum_i{(x_i - \overline{x})^2}/(n-1)}\qquad\qquad\qquad\qquad\qquad\qquad\)</span> (1)</p>
 </div>
     </div><div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>where <em>s</em> is called the sample standard deviation.</p>
 </div>
-    </div></section>
-    </section><section>
-    <section>
+    </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Monte-Carlo-simulation">Monte-Carlo simulation<a class="anchor-link" href="#Monte-Carlo-simulation">&#182;</a></h3>
 </div>
 <div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In a real measurement, where we measure a finite number of times, <em>n</em>, we don't know were on this Gaussian curve our measurements happen to end up. The measurements pick values at random, so to speak, in such a way so that the normal probability density holds true. If we want to simulate this behaviour we need to generate numbers in random. This is called a Monte-Carlo (MC) simulation.</p>
+<p>In a real measurement, where we measure a finite number of times, <em>n</em>, we don't know where on this Gaussian curve our measurements happen to end up. The measurements pick values at random, so to speak, in such a way so that the normal probability density holds true. If we want to simulate this behaviour we need to generate numbers in random. This is called a Monte-Carlo (MC) simulation.</p>
 <p>What this means is that we make use of numpy's random number generator for normal distribution: <a href="http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.random.normal.html">numpy.random.normal</a>.</p>
 </div>
     </div></section><section>
@@ -2003,7 +2034,8 @@ In&nbsp;[3]:
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.10</span> <span class="c"># mean and standard deviation</span>
 
-<span class="c"># generate 1000 points of random number normally distributed around 0 with std of 0.1</span>
+<span class="c"># generate 1000 points of random number normally distributed</span>
+<span class="c"># around 0 with std of 0.1</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
@@ -2012,7 +2044,7 @@ In&nbsp;[3]:
 
 </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can verify that the standard deviation of <em>s</em> is indeed close to <span class="math">\(\sigma\)</span>:</p>
+<p>We can verify that the standard deviation of <em>s</em> is indeed close to <span class="math">\(\sigma\)</span> by using numpy's function std(), which simply use compute eq (1) above:</p>
 </div><div class="fragment">
     
 <div class="cell border-box-sizing code_cell vbox">
@@ -2021,7 +2053,7 @@ In&nbsp;[3]:
 In&nbsp;[4]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">std</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c"># ddof is degrees of freedom.</span>
 </pre></div>
 
 </div>
@@ -2037,7 +2069,7 @@ In&nbsp;[4]:
 
 
 <pre>
-0.10081595223156919
+0.10018076376984626
 </pre>
 
 </div>
@@ -2052,54 +2084,208 @@ In&nbsp;[4]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If we just pick a large enough number as our simulation sample we should be very close to the true population distribution. As we can see 1000 seem to be ok for these tests.</p>
 </div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To test our theoretical formulae we can simply generate a sample of 1000 &quot;measurements&quot; of each variable, each picked from its own predefined population of known mean and error (i.e. standar deviation). We then combine these variables in the way we want to test and compare the final result with our theoretical formula for the specific error propagation.</p>
+</div>
     </div></section>
     </section><section>
     <section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Arithmetic-sum-of-errors">Arithmetic sum of errors<a class="anchor-link" href="#Arithmetic-sum-of-errors">&#182;</a></h2>
 </div>
-</section>
-    </section><section>
-    <section>
+<div class="fragment">
+    
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The general formula of computing an random error estimate for cases where some property is given as a linear combination of two or more independant variables like:</p>
-<p><span class="math">\[y = k + k_1 a + k_2b \, +.. \]</span></p>
+<p><span class="math">\[y = k + k_1 a + k_2b + k_3c \, +.. \]</span></p>
 <p>is given by:</p>
-<p><span class="math">\[\sigma_y^2 = (k_1\sigma_a)^2 + (k_2\sigma_b)^2 +..,\]</span></p>
-<p>where the &quot;<em>k:s</em>&quot; are konstants and <em>a, b,...</em> are the variables. Since <span class="math">\(\sigma^2_a\)</span> is the variance of variable <em>a</em> we get the general notion of: &quot;<em>The total variance of the sum - of independant variables! - is the sum of the variances</em>&quot;, or more concisely: &quot;<em>variances adds!</em> &quot;. In this sense variances are often more useful to work with compared with standard deviations, <strong>std</strong>.</p>
-<p>More often, though, one finds the same result directly in the form of std:</p>
-<p><span class="math">\[\sigma_y = \sqrt{(k_1\sigma_a)^2 + (k_2\sigma_b)^2 +..},\]</span></p>
+<p><span class="math">\(\sigma_y^2 = (k_1\sigma_a)^2 + (k_2\sigma_b)^2 + (k_3\sigma_c)^2 +..,\qquad\qquad\qquad\qquad\qquad\)</span> (2)</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>where the &quot;<em>k:s</em>&quot; are konstants and <em>a, b, c,...</em> are the variables. Since <span class="math">\(\sigma^2_a\)</span> is the variance of variable <em>a</em> we get the general notion of:</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>&quot;<em>The total variance of the sum - of independant variables! - is the sum of the variances</em>&quot;,</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>or more concisely:</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>&quot;<em>variances adds!</em> &quot;</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this sense variances are often more useful to work with compared with standard deviations.</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>More often, though, one finds the same result directly in the form of <em>std</em>:</p>
+<p><span class="math">\(\sigma_y = \sqrt{(k_1\sigma_a)^2 + (k_2\sigma_b)^2 + (k_3\sigma_c)^2 +..},\qquad\qquad\qquad\qquad\qquad\)</span> (3)</p>
 <p>and, so, one may say that &quot;<em>The errors add root mean squarely</em>&quot;.</p>
+</div>
+    </div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>We can now test this formula using an example with known errors by comparing it to a Monte-Carlo simulation.</p>
-</div></section>
-    </section><section>
-    <section>
+</div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h3>
 </div>
 <div class="fragment">
     
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Some text</p>
+<p>In a titration of iron ions (Fe²⁺) a 0.0200 M (mol/l) Potassium Permanganate (KMnO<span class="math">\(_4\)</span>) is used. The Burette containing the permanganate solution has a known standard deviation of 0.02 ml. The initial reading of the burette is 3.52 ml and the final reading is 15.66 ml. What is the standard deviation of the volume used?</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a case of a linear sum where the total titered volume is given by:</p>
 </div>
     </div><div class="fragment">
     
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[5]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre>
+<div class="highlight"><pre><span class="n">vstart</span> <span class="o">=</span> <span class="mf">3.52</span> <span class="c"># initial reading</span>
+<span class="n">vfinal</span> <span class="o">=</span> <span class="mf">15.66</span> <span class="c"># final reading</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">vfinal</span> <span class="o">-</span> <span class="n">vstart</span>
+<span class="k">print</span> <span class="s">&#39;Volume used = {} ml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="c">#Python print function</span>
 </pre></div>
 
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Volume used = 12.14 ml
+
+</pre>
 </div>
-    </div></section>
-    </section><section>
-    <section>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Standard deviation is given by eq(3) : <span class="math">\(\sigma = \sqrt{(0.0200)^2 + (0.0200)^2} = 0.0283\)</span> ml</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[6]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">stdbrtt</span> <span class="o">=</span> <span class="mf">0.0200</span> <span class="c"># standard deviation of burette</span>
+<span class="n">stdvol</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">stdbrtt</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">stdbrtt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c"># std of total volume</span>
+<span class="k">print</span> <span class="s">&#39;std for total volume = {:.4f} ml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span> <span class="n">stdvol</span><span class="p">)</span> <span class="c">#Python print function</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+std for total volume = 0.0283 ml
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section><section>
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's check this with a MC-simulation. First we generate two samples of initial and final volumes, each with a sample size <em>n</em> = 1000. The samples are pulled from two populations, one with a mean of 3.52 ml and the other with a mean of 15.66, and both with std = 0.0200 ml.</p>
+</div></section><section>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[7]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">mu_initial</span> <span class="o">=</span> <span class="mf">3.52</span>
+<span class="n">mu_final</span> <span class="o">=</span> <span class="mf">15.66</span>
+<span class="n">sampleVolstart</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_initial</span><span class="p">,</span> <span class="n">stdbrtt</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">sampleVolfinal</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu_final</span><span class="p">,</span> <span class="n">stdbrtt</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+
+</div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next we simply substract the vector sampleVolstart from the vector sampleVolfinal which will generate a new vector (a numpy array actually) of size 1000.</p>
+<p>Finally we use numpy's method std(), like before, to check what the resulting vector standard deviation is.</p>
+</div>
+    </div><div class="fragment">
+    
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[8]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;s from 1000 &quot;measurements&quot; = {:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">std</span><span class="p">(</span><span class="n">sampleVolfinal</span> <span class="o">-</span> <span class="n">sampleVolstart</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+s from 1000 &quot;measurements&quot; = 0.0275
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div><div class="fragment">
+    
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It seem to give very similar results (it will vary only in the 3rd significant figure most of the times). Had we used a sample size of 10000 we would have seen an even closer match.</p>
+</div>
+    </div></section><section>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Excercise">Excercise<a class="anchor-link" href="#Excercise">&#182;</a></h3>
 </div>
@@ -2114,14 +2300,16 @@ In&nbsp;[4]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Case-of-Product">Case of Product<a class="anchor-link" href="#Case-of-Product">&#182;</a></h2>
 </div>
-</section><section>
+<div class="fragment">
+    
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some text</p>
-</div></section><section>
+</div>
+    </div></section><section>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre>
@@ -2135,7 +2323,7 @@ In&nbsp;[4]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre>
@@ -2151,16 +2339,16 @@ In&nbsp;[4]:
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Case-of-Division">Case of Division<a class="anchor-link" href="#Case-of-Division">&#182;</a></h2>
 </div>
-</section>
-    </section><section>
-    <section>
+<div class="fragment">
+    
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some text</p>
-</div></section><section>
+</div>
+    </div></section><section>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre>
@@ -2174,7 +2362,7 @@ In&nbsp;[4]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[4]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre>
